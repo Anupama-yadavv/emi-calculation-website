@@ -1,0 +1,402 @@
+/* style  */
+
+*{
+ margin: 0;
+ padding: 0;
+ box-sizing: border-box;
+}
+
+/* MAIN CODE START FROM HERE 💥💥💥💥 */
+
+/* NAV BAR START FROM HERE 🔅🌟🌟🌟 */
+
+.emi-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.emi-info div {
+  font-size: 14px;
+}
+
+.nav-link {
+  font-weight: bold;
+  color: white !important;
+}
+
+.nav-link:hover {
+  color: #f9db61 !important; 
+}
+
+.navbaremi{
+  background-color: #096baf !important;
+}
+
+/* NAV BAR END HERE🔅🌟🌟🌟 */
+
+.textt{
+ padding-top: 20px;
+ padding-bottom: 30px;
+}
+
+.textheading{
+ font-weight: 400;
+ font-size: 35px;
+ border-bottom: 3px double #dedada;
+}
+
+/* containeremi code */
+.tab-contentt{
+  padding-left: 20px;
+}
+
+.bkgclremi {
+  background-color: #eee;
+  padding-left: 25px !important;
+  padding-right: 25px!important;
+  padding-top: 11px;
+  padding-bottom: 11px;
+}
+
+.textcntnr{
+  padding: 50px 0;
+}
+
+.bordercol{
+ padding: 20px 0;
+ border: 1px solid #a7a7a7;
+}
+
+
+/* containeremi code  end*/
+
+
+/* another col text */
+.coltext{
+ font-weight: 400;
+ font-size: 27px;
+ border-bottom: 3px double #dedada;
+}
+
+.colnext{
+ border: 2px solid #dedada;
+}
+
+.linktectemi{
+ color: black;
+ font-size: 16px;
+}
+
+.linktectemi:hover{
+ color: black;
+}
+
+.texxt{
+ border-bottom: 1px dotted #ccc;
+}
+
+.emisectionn {
+ border: 3px dashed #ccc;
+ background-color: #eee;
+}
+
+/* another code text code end */
+
+/* home loan calculation tab code here */
+.tab-contentt{
+  padding: 0 20px;
+ }
+ 
+
+.tab-contentt{
+  padding: 0 20px;
+}
+
+/* ================== */
+
+
+.personal{
+  float: right;
+}
+
+input[type="range"] {
+  margin: 10px 0;
+  width: 100%;
+}
+
+.pichartt{
+  width:70%;
+}
+  
+.breakup{
+  width:70%;   
+} 
+
+#price-container::before {
+	content: "Loan EMI";
+	font-size: 18px;
+	display: block;
+  color: rgb(107, 105, 105);
+  padding-bottom: 10px;
+}
+
+.intstyle{
+  color: rgb(107, 105, 105);
+  font-size: 18px;
+}
+
+
+/* home loan calculation end*/
+
+/* ================================ css */
+
+
+
+.anothercolemi{
+ border-top: 1px solid #ccc;
+}
+
+.emiborder{
+ padding-bottom: 30px;
+}
+
+.breakup {
+ width: 100%;
+ padding-right: 20px;
+}
+
+.bordercoltwo{
+ padding-top: 20px;
+ border-right: 1px solid #ccc;
+}
+
+.borderbtmm{
+ border-bottom: 1px solid #ccc;
+}
+
+.borderbtm{
+ border-top: 1px solid #ccc;
+}
+
+.intstyle {
+color: rgb(107, 105, 105);
+font-size: 18px;
+padding-top: 17px;
+}
+
+.coltext{
+padding-top: 10px;
+padding-left: 20px;
+padding-right: 20px;
+}
+
+.texxt{
+padding: 10px 20px;
+}
+
+.textenn{
+padding: 10px 20px;
+}
+
+.detail{
+padding-right: 150px;
+float: right;
+padding-top: 20px;
+column-gap: 20px;
+display: flex;
+}
+
+input[type="number" i] {
+ padding: 5px 20px;
+}
+
+
+.rangepading{
+padding-left: 20px;
+padding-right: 20px;
+}
+
+/* range code=================================================== */
+
+input[type="range"] {
+  /* removing default appearance */
+  -webkit-appearance: none;
+  appearance: none; 
+  /* creating a custom design */
+  width: 100%;
+  outline: none;
+  /*  slider progress trick  */
+  overflow: hidden;
+  border-radius: 16px;
+}
+
+/* Track: webkit browsers */
+input[type="range"]::-webkit-slider-runnable-track {
+  height: 8px;
+  background: #ccc;
+  border-radius: 16px;
+}
+
+/* Thumb: webkit */
+input[type="range"]::-webkit-slider-thumb {
+  /* removing default appearance */
+  -webkit-appearance: none;
+  appearance: none; 
+  /* creating a custom design */
+  height: 8px;
+  width: 8px;
+  background-color: white;
+  border-radius: 50%;
+  border: 2px solid white;
+  /*  slider progress trick  */
+  box-shadow: -407px 0 0 400px #e78f08;
+}
+
+
+
+/* range code=================================================== */
+
+iframe {
+  width: 100%;
+  border: none;
+  overflow: hidden;
+  background-color: #eee !important;
+}
+
+.anothercolemi{
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+ margin: 0 !important;
+ padding: 0 !important ; 
+}
+
+
+.rangepading {
+  padding-left: 20px;
+  padding-right: 20px;
+  background-color: #eee !important;
+}
+
+.emiborder {
+  padding-bottom: 30px;
+  background-color: #eee !important;
+}
+
+.bordercoltwo {
+  padding-top: 20px;
+  border-right: 1px solid #ccc;
+  background-color: #eee !important;
+}
+
+element.style {
+  display: block;
+  box-sizing: border-box;
+  height: 327px;
+  width: 327px;
+  background-color: #eee !important;
+}
+
+.intstyle{
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+/* tab code */
+
+.tabb{
+  overflow: hidden;
+  background-color: #eee;
+}
+
+.emitab-list {
+ overflow: hidden;
+}
+
+.tablist {
+ float: left;
+ cursor: pointer;
+ padding: 10px 20px;
+}
+
+.tabb .active{
+ display: block;
+ background-color: #eee;
+} 
+
+
+ .emitab-list button{
+ border: none;
+ padding: 10px 20px;
+}
+
+
+.tabb{
+ padding-top: 30px ;
+ display: none;
+}
+
+.emitab-list {
+    overflow: hidden;
+    background-color: #eee;
+} 
+
+
+ .bordercol {
+  border: 1px solid #a7a7a7;
+ }
+ 
+ .tabb {
+  border-left: 1px solid #ccc;
+  border-right: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  border-top: 1px solid #ccc;
+  padding-top: 10px;
+ } 
+ 
+ 
+ .emitab-list button{
+  border: 1px solid #bbbaba;
+  padding-top: 10px;
+  background-color: #dfdcdc;
+ }
+   
+ 
+ .emitab-list button:focus {
+  border-bottom: none;
+  outline: none;
+  background-color: #eee;
+ }
+ 
+ .emitab-list button:hover {
+  background-color: #eee;
+  border-bottom: none;
+ }
+  
+
+ .emitab-list button:active {
+  background-color: #eee;
+  border-bottom: none;
+ }
+ 
+ .emitab-list button:visited {
+  background-color: #eee;
+  border-bottom: none;
+ }
+ 
+ 
+ 
+.emitab-list {
+  overflow: hidden;
+  margin-left: 20px;
+ } 
+
+
+
+
+
+
+
+/*   tab end  */

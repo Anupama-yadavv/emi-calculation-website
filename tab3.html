@@ -1,0 +1,300 @@
+
+<link rel="stylesheet" href="style.css">
+<!-- Chart.js library -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+<style>
+    body{
+        background-color: #eee !important;
+    }
+    </style>
+<!-- ---------------------------------------------------------------------------- -->
+
+<div class="details" id="homeloan">
+    <div class="rangee">
+        <div class="detail">
+            <p class="personal p-2" id="personalloan">Car Loan Amount</p>
+            <div class="pagborder">
+                <p id="loan-amt-text" class="p-2">
+                    <input type="number" id="loan-amount-input" min="0" max="1200000" step="1000">
+                </p>
+            </div>
+        </div>
+        <div class="rangepading">
+            <input type="range" id="loan-amount" class="slideremi" min="0" max="1200000" step="1000">
+        </div>
+    </div>
+    <div class="homeamtrange">
+        <div class="detail">
+            <p class="personal p-2">Loan Tenure</p>
+            <div class="pagborder">
+                <p id="loan-period-text" class="p-2">
+                    <input type="number" id="loan-period-input" min="1" max="12" step="1">
+                </p>
+            </div>
+        </div>
+        <div class="rangepading">
+            <input type="range" id="loan-period" class="slideremi" min="1" max="12" step="1">
+        </div>
+    </div>
+    <div class="emiborder">
+        <div class="detail">
+            <p class="personal p-2">Interest Rate</p>
+            <div class="pagborder">
+                <p id="interest-rate-text" class="p-2">
+                    <input type="number" id="interest-rate-input" min="1" max="20" step="1">
+                </p>
+            </div>
+        </div>
+        <div class="rangepading">
+            <input type="range" id="interest-rate" class="slideremi" min="1" max="20" step="1">
+        </div>
+    </div>
+</div>
+
+<!-- another pie chart -->
+<div class="row anothercolemi" style="background-color: #eee !important;">
+    <div class="col-5 bordercoltwo" style="background-color: #eee !important;">
+        <div class="footer text-center borderbtmm">
+            <p id="price-container"><span id="price" style="font-size: 20px; font-weight: 500;">0</span>/mo</p>
+        </div>
+        <div class="loan-details">
+            <div class="chart-details text-center borderbtm">
+                <p class="intstyle">Total Interest Payable</p>
+                <p id="ci" style="font-size: 17px; font-weight: 500;"></p>
+            </div>
+            <div class="chart-details text-center borderbtm">
+                <p class="intstyle">Total Payment (Principal + Interest)</p>
+                <p id="ct" name="num1" style="font-size: 18px; font-weight: 500;"></p>
+            </div>
+            <div class="chart-details text-center borderbtm" style="display: none;">
+                <p class="intstyle">Principal</p>
+                <p id="cp" name="num2" style="font-size: 18px; font-weight: 500;"></p>
+            </div>
+        </div>
+    </div>
+    <div class="col-7 text-center pichartborder align-self-center" style="background-color: #eee !important;">
+        <div class="breakup pichartt" style="background-color: #eee !important;">
+            <canvas id="pieChart" style="background-color: #eee !important;"></canvas>
+        </div>
+    </div>
+</div>
+<!-- pie chart end -->
+
+<script>
+    var P = 300000; // Default loan amount
+    var R = 10; // Default interest rate
+    var N = 8; // Default loan tenure
+    var pie, line;
+    
+    var loan_amt_slider = document.getElementById("loan-amount");
+    var loan_amt_input = document.getElementById("loan-amount-input");
+    var loan_period_slider = document.getElementById("loan-period");
+    var loan_period_input = document.getElementById("loan-period-input");
+    var int_rate_slider = document.getElementById("interest-rate");
+    var int_rate_input = document.getElementById("interest-rate-input");
+    
+    // Update loan amount
+    loan_amt_slider.addEventListener("input", updateLoanAmountFromSlider);
+    loan_amt_input.addEventListener("input", updateLoanAmountFromInput);
+    
+    function updateLoanAmountFromSlider(event) {
+        loan_amt_input.value = event.target.value;
+        updateLoanAmount();
+    }
+    
+    function updateLoanAmountFromInput(event) {
+        loan_amt_slider.value = event.target.value;
+        updateLoanAmount();
+    }
+    
+    function updateLoanAmount() {
+        P = parseFloat(loan_amt_input.value);
+        displayDetails();
+    }
+    
+    // Update loan period
+    loan_period_slider.addEventListener("input", updateLoanPeriodFromSlider);
+    loan_period_input.addEventListener("input", updateLoanPeriodFromInput);
+    
+    function updateLoanPeriodFromSlider(event) {
+        loan_period_input.value = event.target.value;
+        updateLoanPeriod();
+    }
+    
+    function updateLoanPeriodFromInput(event) {
+        loan_period_slider.value = event.target.value;
+        updateLoanPeriod();
+    }
+    
+    function updateLoanPeriod() {
+        N = parseFloat(loan_period_input.value);
+        displayDetails();
+    }
+    
+    // Update interest rate
+    int_rate_slider.addEventListener("input", updateInterestRateFromSlider);
+    int_rate_input.addEventListener("input", updateInterestRateFromInput);
+    
+    function updateInterestRateFromSlider(event) {
+        int_rate_input.value = event.target.value;
+        updateInterestRate();
+    }
+    
+    function updateInterestRateFromInput(event) {
+        int_rate_slider.value = event.target.value;
+        updateInterestRate();
+    }
+    
+    function updateInterestRate() {
+        R = parseFloat(int_rate_input.value);
+        displayDetails();
+    }
+    
+    // Calculate loan details
+    function calculateLoanDetails(p, r, emi) {
+        let totalInterest = 0;
+        let yearlyInterest = [];
+        let yearPrincipal = [];
+        let years = [];
+        let year = 1;
+        let [counter, principal, interes] = [0, 0, 0];
+        while (p > 0) {
+            let interest = parseFloat(p) * parseFloat(r);
+            p = parseFloat(p) - (parseFloat(emi) - interest);
+            totalInterest += interest;
+            principal += parseFloat(emi) - interest;
+            interes += interest;
+            if (++counter == 12) {
+                years.push(year++);
+                yearlyInterest.push(parseInt(interes));
+                yearPrincipal.push(parseInt(principal));
+                counter = 0;
+            }
+        }
+        line.data.datasets[0].data = yearPrincipal;
+        line.data.datasets[1].data = yearlyInterest;
+        line.data.labels = years;
+        return totalInterest;
+    }
+    
+    // Display loan details
+    function displayDetails() {
+        let r = parseFloat(R) / 1200;
+        let n = parseFloat(N) * 12;
+    
+        let num = parseFloat(P) * r * Math.pow(1 + r, n);
+        let denom = Math.pow(1 + r, n) - 1;
+        let emi = parseFloat(num) / parseFloat(denom);
+    
+        let payabaleInterest = calculateLoanDetails(P, r, emi);
+    
+        let opts = '{style: "decimal", currency: "en"}';
+    
+        document.querySelector("#cp").innerText =
+            parseFloat(P).toLocaleString("en", opts) + "";
+    
+        document.querySelector("#ci").innerText =
+            parseFloat(payabaleInterest).toLocaleString("en", opts) + "";
+    
+        document.querySelector("#ct").innerText =
+            parseFloat(parseFloat(P) + parseFloat(payabaleInterest)).toLocaleString(
+                "en",
+                opts
+            ) + "";
+    
+        document.querySelector("#price").innerText =
+            parseFloat(emi).toLocaleString("en", opts) + "";
+    
+        pie.data.datasets[0].data[0] = P;
+        pie.data.datasets[0].data[1] = payabaleInterest;
+        pie.update();
+        line.update();
+    }
+    
+    // Initialize everything
+    function initialize() {
+        loan_amt_input.value = P;
+        loan_amt_slider.value = P;
+        loan_period_input.value = N;
+        loan_period_slider.value = N;
+        int_rate_input.value = R;
+        int_rate_slider.value = R;
+    
+        line = new Chart(document.getElementById("lineChart"), {
+            data: {
+                datasets: [
+                    {
+                        type: "line",
+                        label: "Yearly Principal paid",
+                        borderColor: "rgb(54, 162, 235)",
+                        data: []
+                    },
+                    {
+                        type: "line",
+                        label: "Yearly Interest paid",
+                        borderColor: "rgb(255, 99, 132)",
+                        data: []
+                    }
+                ],
+                labels: []
+            },
+            options: {
+                plugins: {
+                    title: {
+                        display: true,
+                        text: "Yearly Payment Breakdown"
+                    }
+                },
+                scales: {
+                    x: {
+                        title: {
+                            color: "grey",
+                            display: true,
+                            text: "Years Passed"
+                        }
+                    },
+                    y: {
+                        title: {
+                            color: "grey",
+                            display: true,
+                            text: "Money in ."
+                        }
+                    }
+                }
+            }
+        });
+    
+        pie = new Chart(document.getElementById("pieChart"), {
+            type: "doughnut",
+            data: {
+                labels: ["Principal Loan Amount", "Total Interest"],
+                datasets: [
+                    {
+                        label: "Home Loan Details",
+                        data: [P, 0],
+                        backgroundColor: ["rgb(136, 168, 37)", "rgb(237, 140, 43)"],
+                        hoverOffset: 4
+                    }
+                ]
+            },
+            options: {
+                plugins: {
+                    title: {
+                        display: true,
+                        text: "Break-up of Total Payment"
+                    }
+                }
+            }
+        });
+    
+        displayDetails();
+    }
+    
+    initialize();
+    </script>
+
+</body>
+</html>
+
