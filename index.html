@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EMI CALCULATION</title>
+ <link rel="stylesheet" href="style.css">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Chart.js library -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+</head>
+<body>
+
+  <header>
+    <nav class="navbar navbar-expand-lg navbaremi">
+        <div class="container">
+            <!-- Logo Section -->
+            <a class="navbar-brand d-flex align-items-center navlogo" href="#">
+                <img src="./emilogo.png" alt="Logo" class="me-2" style="width: 70px; height: 60px; background-color: #eee;">
+            </a>
+
+            <!-- Toggler/collapsible Button -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Navbar Links -->
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">LOAN CALCULATORS, WIDGETS & RATES</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">ARTICLES</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">PRODUCT REVIEWS</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">NEWS & OPINION</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+<!-- nav menu end -->
+
+<!-- heading section -->
+
+<div class=" container textt"> <h2 class="textheading">EMI Calculator for Home Loan, Car Loan & Personal Loan in India</h2></div>
+
+<!-- heading section end here -->
+
+<!-- emi section -->
+
+<!-- emi section -->
+
+<div class="container bkgclremi">
+  <div class="row p-3 emisectionn">
+      <!-- 3tab btn-->
+  <div class="col-8 bordercol">
+  
+  <div class="emitab-list">
+  <button class="tablist" onclick="openTabemi(event,'emitab1')" id ="tabbb1">Home Loan</button>
+  <button class="tablist"  onclick="openTabemi(event,'emitab2')" id="tabbb2">Personal Loan</button>
+  <button class="tablist  borderbtn" onclick="openTabemi(event,'emitab3')">Car Loan</button>
+  </div>
+  <!-- tab home loan  -->
+  <div class="tab-contentt" >
+    <!-- -- -->
+  <div id="emitab1" class="tabb active" > 
+  
+    <div class="details" id="homeloan">
+
+      <div class="rangee">
+        <div class="detail">
+          <p class="personal p-2" id="personalloan">Home Loan Amount</p>
+          <div class="pagborder">
+            <p id="loan-amt-text" class="p-2">
+              <input type="number" id="loan-amount-input" min="100000" max="1200000" step="1000">
+            </p>
+          </div>
+        </div>
+        <div class="rangepading">
+          <input type="range" id="loan-amount" class="slideremi" min="100000" max="1200000" step="1000">
+        </div>
+      </div>
+      <div class="homeamtrange">
+        <div class="detail">
+          <p class="personal p-2">Loan Tenure</p>
+          <div class="pagborder">
+            <p id="loan-period-text" class="p-2">
+              <input type="number" id="loan-period-input" min="2" max="15" step="1">
+            </p>
+          </div>
+        </div>
+        <div class="rangepading">
+          <input type="range" id="loan-period" class="slideremi" min="2" max="15" step="1">
+        </div>
+      </div>
+      <div class="emiborder">
+        <div class="detail">
+          <p class="personal p-2">Interest Rate</p>
+          <div class="pagborder">
+            <p id="interest-rate-text" class="p-2">
+              <input type="number" id="interest-rate-input" min="1" max="20" step="1">
+            </p>
+          </div>
+        </div>
+        <div class="rangepading">
+          <input type="range" id="interest-rate" class="slideremi" min="1" max="20" step="1">
+        </div>
+      </div>
+    </div>
+    
+    <!-- another pie chart -->
+    <div class="row anothercolemi" style="background-color: #eee !important;">
+      <div class="col-5 bordercoltwo" style="background-color: #eee !important;">
+        <div class="footer text-center borderbtmm">
+          <p id="price-container"><span id="price" style="font-size: 20px; font-weight: 500;">0</span>/mo</p>
+        </div>
+        <div class="loan-details">
+          <div class="chart-details text-center borderbtm">
+            <p class="intstyle">Total Interest Payable</p>
+            <p id="ci" style="font-size: 17px; font-weight: 500;"></p>
+          </div>
+          <div class="chart-details text-center borderbtm">
+            <p class="intstyle">Total Payment (Principal + Interest)</p>
+            <p id="ct" name="num1" style="font-size: 18px; font-weight: 500;"></p>
+          </div>
+          <div class="chart-details text-center borderbtm" style="display: none;">
+            <p class="intstyle">Principal</p>
+            <p id="cp" name="num2" style="font-size: 18px; font-weight: 500;"></p>
+          </div>
+        </div>
+      </div>
+      <div class="col-7 text-center pichartborder align-self-center" style="background-color: #eee !important;">
+        <div class="breakup pichartt" style="background-color: #eee !important;">
+          <canvas id="pieChart" style="background-color: #eee !important;"></canvas>
+        </div>
+      </div>
+    </div>
+    <!-- pie chart end -->
+  
+  <!-- --- -->
+  </div>
+  <!-- tab home loan end -->
+  
+  <!-- tab personal loan -->
+  <div id="emitab2" class="tabb">
+  <!-- tab 2 content --> 
+  <iframe src="./tabtwo.html"  width="100%" height="730px" frameborder="0" ></iframe>
+  </div>
+  <!-- tab personal  loan end -->
+  
+  <!-- tab car loan -->
+  <div id="emitab3" class="tabb">
+
+<!-- tab 3 content  -->
+<iframe src="./tab3.html" width="100%" height="730px"  frameborder="0" ></iframe>
+
+  </div>
+
+  </div>
+  <!-- tab car loan end here -->
+  </div>
+  <!-- tab  content end-->
+  
+  
+  <!-- text part here -->
+  <div class="col-4">
+    <div class="colnext">
+  <h3 class="coltext">Popular Tools & Expert Insights</h3>
+  <a href="#" class="linktectemi "><p class="texxt">Comprehensive Loan Calculator EMI, Tenure, Interest & Affordability</p></a>
+  <a href="#" class="linktectemi "><p class="texxt">Home Loan EMI Planner Prepayments, Taxes & Insurance Included</p></a>
+  <a href="#" class="linktectemi "><p class="texxt">Current Home Loan Interest Rates as of September 09, 2024</p></a>
+  <a href="#" class="linktectemi "><p class="texxt">Why Consider the IRCTC HDFC Bank Credit Card?</p></a>
+  <a href="#" class="linktectemi "><p class="textenn">Should You Get an Add-on Credit Card for Your Family?</p></a>
+  
+</div>
+  
+  </div>
+  </div>
+  </div>
+  <!-- emi section end-->
+  
+  
+  <!-- another section text part -->
+  
+  <div class="container textcntnr">
+  </div>
+
+
+
+<!-- Bootstrap JS (Optional) - If you need to use dropdowns or other JS features -->
+<script src="script.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
